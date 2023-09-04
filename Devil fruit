@@ -1,0 +1,59 @@
+devil_fruits = {}
+
+def create_devil_fruit():
+    name = input("Enter the name of your Devil Fruit: ")
+    fruit_type = select_devil_fruit_type()
+    abilities = input("Enter the abilities of the Devil Fruit (separated by commas): ").split(",")
+    
+    devil_fruits[name] = {"Type": fruit_type, "Abilities": abilities}
+    
+    print("Devil Fruit created successfully!")
+    
+def select_devil_fruit_type():
+    print("Choose a Devil Fruit type:")
+    print("1. Zoan")
+    print("2. Paramecia")
+    print("3. Logia")
+    
+    while True:
+        choice = input("Enter the number corresponding to the type: ")
+        
+        if choice == "1":
+            return "Zoan"
+        elif choice == "2":
+            return "Paramecia"
+        elif choice == "3":
+            return "Logia"
+        else:
+            print("Invalid input. Please try again.")
+
+def get_devil_fruit_info(fruit_name):
+    if fruit_name in devil_fruits:
+        fruit_info = devil_fruits[fruit_name]
+        print(f"\nName: {fruit_name}")
+        print(f"Type: {fruit_info['Type']}")
+        print(f"Abilities: {', '.join(fruit_info['Abilities'])}\n")
+    else:
+        print("Devil Fruit not found. Please create one.")
+
+def main():
+    while True:
+        print("\n--- Devil Fruit Creator ---")
+        print("1. Create a Devil Fruit")
+        print("2. Retrieve Devil Fruit Abilities")
+        print("3. Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            create_devil_fruit()
+        elif choice == "2":
+            fruit_name = input("Enter the name of the Devil Fruit: ")
+            get_devil_fruit_info(fruit_name)
+        elif choice == "3":
+            break
+        else:
+            print("Invalid input. Please try again.")
+
+if __name__ == "__main__":
+    main()
