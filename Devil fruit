@@ -4,20 +4,20 @@ def create_devil_fruit():
     name = input("Enter the name of your Devil Fruit: ")
     fruit_type = select_devil_fruit_type()
     abilities = input("Enter the abilities of the Devil Fruit (separated by commas): ").split(",")
-    
+
     devil_fruits[name] = {"Type": fruit_type, "Abilities": abilities}
-    
+
     print("Devil Fruit created successfully!")
-    
+
 def select_devil_fruit_type():
     print("Choose a Devil Fruit type:")
     print("1. Zoan")
     print("2. Paramecia")
     print("3. Logia")
-    
+
     while True:
         choice = input("Enter the number corresponding to the type: ")
-        
+
         if choice == "1":
             return "Zoan"
         elif choice == "2":
@@ -33,8 +33,21 @@ def get_devil_fruit_info(fruit_name):
         print(f"\nName: {fruit_name}")
         print(f"Type: {fruit_info['Type']}")
         print(f"Abilities: {', '.join(fruit_info['Abilities'])}\n")
+
+        similar_fruits = find_similar_fruits(fruit_info['Abilities'])
+        if similar_fruits:
+            print("Similar Devil Fruits:")
+            for similar_fruit in similar_fruits:
+                print(similar_fruit)
     else:
         print("Devil Fruit not found. Please create one.")
+
+def find_similar_fruits(abilities):
+    similar_fruits = []
+    for name, fruit_info in devil_fruits.items():
+        if any(ability in fruit_info['Abilities'] for ability in abilities):
+            similar_fruits.append(name)
+    return similar_fruits
 
 def main():
     while True:
@@ -42,9 +55,9 @@ def main():
         print("1. Create a Devil Fruit")
         print("2. Retrieve Devil Fruit Abilities")
         print("3. Exit")
-        
+
         choice = input("Enter your choice: ")
-        
+
         if choice == "1":
             create_devil_fruit()
         elif choice == "2":
